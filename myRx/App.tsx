@@ -4,6 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import Stacks from './App/Stack';
 import './global.css';
 
+
+// Keep the splash screen visible while we fetch resources
+
+
+
 export default function App() {
   return (
     <NavigationContainer>
