@@ -4,6 +4,7 @@ import Index from './containers/Index'
 import Login from './containers/Login'
 import onboarding from './containers/onboarding'
 import createacc from './containers/createacc'
+import verification from './containers/verification'
 
 
 const Stack = createNativeStackNavigator()
@@ -17,6 +18,9 @@ const Stacks = () => {
       ) : null}
       <Stack.Screen name='Home' component={Index} options={{headerShown:false}}/>
       <Stack.Screen name="AccountCreationPage" component={createacc} options={{headerShown:false}}/>
+      <Stack.Screen name='LoginPage' component={Login} options={{headerShown:false}}/>
+      <Stack.Screen name='Verification' component={verification} options={{headerShown:false}}/>
+
 
     </Stack.Navigator>
   )

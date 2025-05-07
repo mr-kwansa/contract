@@ -6,6 +6,10 @@ import { Dropdown } from 'react-native-element-dropdown';
 import PhoneInput, { isValidPhoneNumber,ICountry } from 'react-native-international-phone-number';
 import { IconBase } from 'react-icons';
 import { useNavigation } from '@react-navigation/native';
+import SegmentedControl from '@react-native-segmented-control/segmented-control';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import Login from './Login';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const createacc = () => {
     const [selectedCountry, setSelectedCountry] =
@@ -36,6 +40,21 @@ const createacc = () => {
     console.log(value)
 
     const navigation= useNavigation()
+    type RootStackParamList = {
+            LoginPage: undefined;
+            Verification: undefined;
+             };
+    type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
+    type NavigationProp2 = NativeStackNavigationProp<RootStackParamList, 'Verification'>;
+
+    
+    const handletologin = () => {
+        navigation.navigate('LoginPage')
+                           };
+    const handletootp = () =>{
+        navigation.navigate('Verification')
+        console.log('hello im am pressed ')
+    };
 
 
   return (
@@ -50,17 +69,19 @@ const createacc = () => {
             <Text className='text-gray-500 pt-2'>Create an account to get started with myRx</Text>
         </View>
         {/* sign in and register area */}
-        <View className='flex-row justify-center items-center pt-5'>
-            <TouchableOpacity className='border-gray-500 border-[0.5px] w-52 h-10 rounded-lg items-center justify-center'>
-                <Text className='text-2xl'>
-                    Sign In
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity className='bg-purple-600 w-52 h-10 rounded-lg justify-center items-center'>
-                <Text className='text-white text-2xl'>
-                    Register
-                </Text>
-            </TouchableOpacity>
+        <View className='justify-center items-center'>
+            <View className='flex-row justify-center items-center pt-5  w-52 h-10'>
+                <TouchableOpacity className='border-gray-500 border-[0.5px] w-52 h-10 rounded-lg items-center justify-center' onPress={handletologin}>
+                    <Text className='text-2xl'>
+                        Sign In
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity className='bg-purple-600 w-52 h-10 rounded-lg justify-center items-center'>
+                    <Text className='text-white text-2xl'>
+                        Register
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
         {/* fname and lname area */}
         <View className='flex-row  gap-4 justify-center  pt-12'>
@@ -83,7 +104,9 @@ const createacc = () => {
             <Text className='text-2xl'>
                 Date Of Birth
             </Text>
-            <TextInput className='border-[0.5px] w-[343px] h-[48px] rounded-lg' placeholder='01/12/2025'></TextInput>
+            <TextInput className='border-[0.5px] w-[343px] h-[48px] rounded-lg' placeholder='01/12/2025'>
+
+            </TextInput>
         </View>
 
         {/* gender input field */}
@@ -130,7 +153,9 @@ const createacc = () => {
         </View>
 
         <View className='justify-center items-center pt-10'>
-            <TouchableOpacity className='border-gray-500 border-[0.5px] w-[343] h-[48] rounded-lg items-center justify-center bg-[#7F56D9]'>
+            <TouchableOpacity className='border-gray-500 border-[0.5px] w-[343] h-[48] 
+            rounded-lg items-center justify-center bg-[#7F56D9]'
+            onPress={handletootp}>
                 <Text className='text-white text-2xl font-bold'>
                     Register
                 </Text>
