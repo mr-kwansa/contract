@@ -6,9 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
-
-const Login = () => {
-
+const Verification = () => {
     const navigation= useNavigation()
     type RootStackParamList = {
             AccountcreationPage: undefined;
@@ -73,5 +71,4 @@ const Login = () => {
     </SafeAreaView>
   )
 }
-
-export default Login
+export default Verification

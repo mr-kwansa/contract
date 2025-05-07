@@ -5,10 +5,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import { JSX } from 'react/jsx-runtime';
 
 const phoneviewtab = () =>(
-    <View className="flex-1 p-4 bg-white">
+    <View className="flex-1 p-4">
     <View className="mb-4">
       <Text className="text-base">Phone number</Text>
       <TextInput className="bg-white border border-gray-300 rounded-md px-4 py-2 mt-2 w-full" />
@@ -65,12 +64,12 @@ const Login = () => {
 
     const navigation= useNavigation()
     type RootStackParamList = {
-            AccountcreationPage: undefined;
+            AccountCreationPage: undefined;
              };
-    type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'AccountcreationPage'>;
+    type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'AccountCreationPage'>;
     
     const handletoregister = () => {
-        navigation.navigate('AccountcreationPage')
+        navigation.navigate('AccountCreationPage')
                            };
 
     const layout = useWindowDimensions();
@@ -102,13 +101,13 @@ const Login = () => {
         </View>
 
         {/* phone email membershipid sections */}
-        <View className='h-[300px] mt-10'>
+        <View className=' h-full mt-10'>
             <TabView
              navigationState={{ index, routes }}
              renderScene={renderScene}
              onIndexChange={setIndex}
              initialLayout={{ width: layout.width }}
-             lazy
+            //  lazy
 
              className='flex-1'
             ></TabView>

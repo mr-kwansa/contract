@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Index from './containers/Index'
 import Login from './containers/Login'
-import onboarding from './containers/onboarding'
-import createacc from './containers/createacc'
-import verification from './containers/verification'
+import Onboarding from './containers/Onboarding'
+import Createacc from './containers/Createacc'
+import Verification from './containers/Verification'
 
 
 const Stack = createNativeStackNavigator()
@@ -14,14 +14,12 @@ const Stacks = () => {
   return (
     <Stack.Navigator>
       {!isauthenticated ? (
-        <Stack.Screen name="onboarding" component={onboarding} options={{headerShown:false}} />
+        <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}} />
       ) : null}
       <Stack.Screen name='Home' component={Index} options={{headerShown:false}}/>
-      <Stack.Screen name="AccountCreationPage" component={createacc} options={{headerShown:false}}/>
+      <Stack.Screen name="AccountCreationPage" component={Createacc} options={{headerShown:false}}/>
       <Stack.Screen name='LoginPage' component={Login} options={{headerShown:false}}/>
-      <Stack.Screen name='Verification' component={verification} options={{headerShown:false}}/>
-
-
+      <Stack.Screen name='Verification' component={Verification} options={{headerShown:false}}/>
     </Stack.Navigator>
   )
   

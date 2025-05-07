@@ -6,12 +6,9 @@ import { Dropdown } from 'react-native-element-dropdown';
 import PhoneInput, { isValidPhoneNumber,ICountry } from 'react-native-international-phone-number';
 import { IconBase } from 'react-icons';
 import { useNavigation } from '@react-navigation/native';
-import SegmentedControl from '@react-native-segmented-control/segmented-control';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import Login from './Login';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-const createacc = () => {
+const Createacc = () => {
     const [selectedCountry, setSelectedCountry] =
     useState<null | ICountry>(null);
   const [inputValue, setInputValue] = useState<string>('');
@@ -166,4 +163,4 @@ const createacc = () => {
   )
 }
 
-export default createacc
+export default Createacc
