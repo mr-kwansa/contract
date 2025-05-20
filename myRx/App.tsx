@@ -1,19 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import Stacks from './App/Stack';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import './global.css';
+import RootStack from './app/Stack/RootStack';
 
-
-// Keep the splash screen visible while we fetch resources
-
-
-
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stacks/>
+      <RootStack />
     </NavigationContainer>
-  )
+  );
+};
 
-}
+export default App;

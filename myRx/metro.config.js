@@ -1,7 +1,13 @@
-const { getDefaultConfig } = require('expo/metro-config');
-const { withNativeWind } = require('nativewind/metro');
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const {withNativeWind} = require('nativewind/metro');
 
-// eslint-disable-next-line no-undef
-const config = getDefaultConfig(__dirname);
+const config = mergeConfig(getDefaultConfig(__dirname), {
+  /**
+   * Metro configuration
+   * https://reactnative.dev/docs/metro
+   *
+   * @type {import('metro-config').MetroConfig}
+   */
+});
 
-module.exports = withNativeWind(config, { input: './global.css' });
+module.exports = withNativeWind(config, {input: './global.css'});

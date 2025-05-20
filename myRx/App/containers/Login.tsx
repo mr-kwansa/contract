@@ -1,123 +1,269 @@
-import { View, Text, TouchableOpacity, TextInput, useWindowDimensions } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import {
+  View,
+  Text,
+  StyleSheet,
+  useWindowDimensions,
+  Pressable,
+} from 'react-native';
+import {TabBar, TabView} from 'react-native-tab-view';
+import React from 'react';
+import Input from '../components/Input';
+import {initState, initAction, NavigationProp, Routes} from '../types/type';
+import PrimaryButton from '../components/PrimaryButton';
+import {useNavigation} from '@react-navigation/native';
 
-const phoneviewtab = () =>(
-    <View className="flex-1 p-4">
-    <View className="mb-4">
-      <Text className="text-base">Phone number</Text>
-      <TextInput className="bg-white border border-gray-300 rounded-md px-4 py-2 mt-2 w-full" />
-    </View>
-    <View className="mb-4">
-      <Text className="text-base">Password</Text>
-      <TextInput className="bg-white border border-gray-300 rounded-md px-4 py-2 mt-2 w-full" />
-    </View>
-  </View>
-);
+const initialState: initState = {
+  phoneNumber: '',
+  countryCode: '+233',
+  password: '',
+  email: '',
+  membershipId: '',
+};
 
-const siginwithemailtab = () =>(
-
-    <View className="flex-1 p-4">
-    <View className="mb-4">
-      <Text className="text-base">Email</Text>
-      <TextInput className="bg-white border border-gray-300 rounded-md px-4 py-2 mt-2 w-full" />
-    </View>
-    <View className="mb-4">
-      <Text className="text-base">Password</Text>
-      <TextInput className="bg-white border border-gray-300 rounded-md px-4 py-2 mt-2 w-full" />
-    </View>
-  </View>
-);
-
-const membershipidtab = () =>(
-
-    <View className="flex-1 p-4">
-    <View className="mb-4">
-      <Text className="text-base">Membership ID</Text>
-      <TextInput className="bg-white border border-gray-300 rounded-md px-4 py-2 mt-2 w-full" />
-    </View>
-    <View className="mb-4">
-      <Text className="text-base">Password</Text>
-      <TextInput className="bg-white border border-gray-300 rounded-md px-4 py-2 mt-2 w-full" />
-    </View>
-  </View>
-);
-
-const renderScene = SceneMap({
-    first: phoneviewtab,
-    second: siginwithemailtab,
-    third: membershipidtab
-  });
-
-  const routes = [
-    { key: 'first', title: 'Phone' },
-    { key: 'second', title: 'Email' },
-    {key:'third',title:'Membership ID'}
-  ];
-
+const reducer = (state: initState, action: initAction): initState => {
+  switch (action.type) {
+    case 'UPDATE_PHONE_NUMBER':
+      return {...state, phoneNumber: action.payload};
+    case 'UPDATE_COUNTRY_CODE':
+      return {...state, countryCode: action.payload};
+    case 'UPDATE_PASSWORD':
+      return {...state, password: action.payload};
+    case 'UPDATE_EMAIL':
+      return {...state, email: action.payload};
+    case 'UPDATE_MEMBERSHIPID':
+      return {...state, membershipId: action.payload};
+    default:
+      return state;
+  }
+};
 
 const Login = () => {
+  const navigation = useNavigation<NavigationProp>();
+  const [index, setIndex] = React.useState(0);
+  const layout = useWindowDimensions();
+  const [routes] = React.useState([
+    {key: 'first', title: 'Phone'},
+    {key: 'second', title: 'Email'},
+    {key: 'third', title: 'Membership ID'},
+  ]);
+  const Email = () => {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
 
-    const navigation= useNavigation()
-    type RootStackParamList = {
-            AccountCreationPage: undefined;
-             };
-    type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'AccountCreationPage'>;
-    
-    const handletoregister = () => {
-        navigation.navigate('AccountCreationPage')
-                           };
+    return (
+      <View className="mt-10 ">
+        <Text className="font-semibold mb-5">Email</Text>
+        <Input
+          isEmail
+          hasIcon
+          placeholder="Enter your Email"
+          value={state.phoneNumber}
+          onChangeText={text =>
+            dispatch({type: 'UPDATE_PHONE_NUMBER', payload: text})
+          }
+          onCountryCodeChange={code =>
+            dispatch({type: 'UPDATE_COUNTRY_CODE', payload: code})
+          }
+        />
+        <Text className="font-semibold mt-5 mb-5">Password</Text>
+        <Input
+          hasIcon
+          isPassword
+          placeholder="Enter your password"
+          value={state.password}
+          onChangeText={text =>
+            dispatch({type: 'UPDATE_PASSWORD', payload: text})
+          }
+        />
+        <Pressable
+          className="mt-5"
+          //@ts-ignore
+          onPress={() => navigation.navigate('forgot password')}>
+          <Text className="text-primary">Forgot Password</Text>
+        </Pressable>
+        <View className="mt-14" />
+        <PrimaryButton
+          hasBg
+          title={'Sign In'}
+          disabled={
+            !(
+              (state.password?.length ?? 0) > 1 &&
+              (state.phoneNumber?.length ?? 0) > 1
+            )
+          }
+          onPress={() => {
+            console.log('pressed'), navigation.navigate('password reset');
+          }}
+          isActive={
+            (state.password?.length ?? 0) > 1 &&
+            (state.phoneNumber?.length ?? 0) > 1
+          }
+        />
+      </View>
+    );
+  };
 
-    const layout = useWindowDimensions();
-    const [index, setIndex] = React.useState(0);
-                         
+  const Phone = () => {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+
+    return (
+      <View className="mt-10 ">
+        <Text className="font-semibold mb-5">Phone Number</Text>
+        <Input
+          isPhone
+          hasIcon
+          placeholder="Enter phone number"
+          value={state.phoneNumber}
+          onChangeText={text =>
+            dispatch({type: 'UPDATE_PHONE_NUMBER', payload: text})
+          }
+          onCountryCodeChange={code =>
+            dispatch({type: 'UPDATE_COUNTRY_CODE', payload: code})
+          }
+        />
+        <Text className="font-semibold mt-5 mb-5">Password</Text>
+        <Input
+          hasIcon
+          isPassword
+          placeholder="Enter your password"
+          value={state.password}
+          onChangeText={text =>
+            dispatch({type: 'UPDATE_PASSWORD', payload: text})
+          }
+        />
+        <Pressable
+          className="mt-5"
+          onPress={() => navigation.navigate('forgot password')}>
+          <Text className="text-primary">Forgot Password</Text>
+        </Pressable>
+        <View className="mt-14" />
+        <PrimaryButton
+          hasBg
+          disabled={
+            !(
+              (state.password?.length ?? 0) > 1 &&
+              (state.phoneNumber?.length ?? 0) > 1
+            )
+          }
+          title={'Sign In'}
+          onPress={() => {
+            console.log('pressed'), navigation.navigate('home run');
+          }}
+          isActive={
+            (state.password?.length ?? 0) > 1 &&
+            (state.phoneNumber?.length ?? 0) > 1
+          }
+        />
+      </View>
+    );
+  };
+
+  const MembershipID = () => {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+
+    return (
+      <View className="mt-10 ">
+        <Text className="font-semibold mb-5">Membership Id</Text>
+        <Input
+          placeholder="Enter your Membership ID"
+          value={state.phoneNumber}
+          onChangeText={text =>
+            dispatch({type: 'UPDATE_PHONE_NUMBER', payload: text})
+          }
+          onCountryCodeChange={code =>
+            dispatch({type: 'UPDATE_COUNTRY_CODE', payload: code})
+          }
+        />
+        <Text className="font-semibold mt-5 mb-5">Password</Text>
+        <Input
+          hasIcon
+          isPassword
+          placeholder="Enter your password"
+          value={state.password}
+          onChangeText={text =>
+            dispatch({type: 'UPDATE_PASSWORD', payload: text})
+          }
+        />
+        <Pressable
+          className="mt-5"
+          onPress={() => navigation.navigate('forgot password')}>
+          <Text className="text-primary">Forgot Password</Text>
+        </Pressable>
+        <View className="mt-14" />
+        <PrimaryButton
+          hasBg
+          disabled={
+            !(
+              (state.password?.length ?? 0) > 1 &&
+              (state.phoneNumber?.length ?? 0) > 1
+            )
+          }
+          title={'Sign In'}
+          onPress={() => {
+            console.log('pressed'), navigation.navigate('password reset');
+          }}
+          isActive={
+            (state.password?.length ?? 0) > 1 &&
+            (state.phoneNumber?.length ?? 0) > 1
+          }
+        />
+      </View>
+    );
+  };
+
+  const renderScene: React.FC<Routes> = ({route}) => {
+    switch (route.key) {
+      case 'first':
+        return <Phone />;
+      case 'second':
+        return <Email />;
+      case 'third':
+        return <MembershipID />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <SafeAreaView className='flex-1'>
-         <View className='ml-4'>
-            <TouchableOpacity onPress={()=> navigation.goBack()}>
-                <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
-        </View>
-        <View className='pt-14 ml-4'>
-            <Text className='text-purple-600 text-3xl font-bold'>Login to myRx</Text>
-            <Text className='text-gray-500 pt-2'>Sign in to access your medications and health </Text>
-            <Text className='text-gray-500' >records</Text>
-        </View>
-         <View className='flex-row justify-center items-center pt-5'>
-                    <TouchableOpacity className='bg-purple-600  w-52 h-10 rounded-lg items-center justify-center'>
-                        <Text className=' text-white text-2xl'>
-                            Sign In
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity className=' w-52 h-10 border-[0.5px] rounded-lg justify-center items-center' onPress={handletoregister}>
-                        <Text className='text-2xl'>
-                            Register
-                        </Text>
-                    </TouchableOpacity>
-        </View>
+    <View style={styles.container}>
+      <TabView
+        navigationState={{index, routes}}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{width: layout.width}}
+        lazy
+        renderTabBar={props => (
+          <TabBar
+            {...props}
+            style={styles.tabBar}
+            activeColor="#6200E0"
+            inactiveColor="#000"
+            indicatorStyle={styles.indicatorStyle}
+          />
+        )}
+      />
+    </View>
+  );
+};
 
-        {/* phone email membershipid sections */}
-        <View className=' h-full mt-10'>
-            <TabView
-             navigationState={{ index, routes }}
-             renderScene={renderScene}
-             onIndexChange={setIndex}
-             initialLayout={{ width: layout.width }}
-            //  lazy
+export default Login;
 
-             className='flex-1'
-            ></TabView>
-        </View>
-    </SafeAreaView>
-  )
-}
-
-export default Login
-
-// function SceneMap(arg0: { first: () => JSX.Element; second: () => JSX.Element; third: () => JSX.Element; }) {
-//     throw new Error('Function not implemented.');
-// }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  sceneContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  tabBar: {
+    backgroundColor: '#fff',
+    elevation: 1,
+  },
+  indicatorStyle: {
+    backgroundColor: '#598DB2',
+    borderRadius: 22,
+    height: 1,
+  },
+});
