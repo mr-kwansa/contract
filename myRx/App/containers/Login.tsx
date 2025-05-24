@@ -110,7 +110,7 @@ const Login = () => {
             //  lazy
 
              className='flex-1'
-            ></TabView>
+            />
         </View>
     </SafeAreaView>
   )
@@ -121,3 +121,4 @@ export default Login
 // function SceneMap(arg0: { first: () => JSX.Element; second: () => JSX.Element; third: () => JSX.Element; }) {
 //     throw new Error('Function not implemented.');
 // }
+
