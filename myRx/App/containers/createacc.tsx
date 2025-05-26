@@ -47,6 +47,8 @@ const Createacc = () => {
     
     const handletologin = () => {
         navigation.navigate('LoginPage')
+        
+        
                            };
     const handletootp = () =>{
         navigation.navigate('Verification')
@@ -66,15 +68,19 @@ const Createacc = () => {
             <Text className='text-gray-500 pt-2'>Create an account to get started with myRx</Text>
         </View>
         {/* sign in and register area */}
-        <View className='justify-center items-center'>
-            <View className='flex-row justify-center items-center pt-5  w-52 h-10'>
-                <TouchableOpacity className='border-gray-500 border-[0.5px] w-52 h-10 rounded-lg items-center justify-center' onPress={handletologin}>
-                    <Text className='text-2xl'>
+        <View className='justify-center items-center mr-8'>
+            <View className='flex-row items-center pt-5  mt-10 w-96 h-10 border-[0.5px] border-gray-500 rounded-lg'>
+                <TouchableOpacity
+                                className='w-52 h-10 rounded-lg items-center justify-center mb-5'
+                                onPress={handletologin}>
+                    <Text
+                        className='text-2xl items-center justify-center '
+                    >
                         Sign In
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity className='bg-purple-600 w-52 h-10 rounded-lg justify-center items-center'>
-                    <Text className='text-white text-2xl'>
+                <TouchableOpacity className=' w-52 h-10 rounded-lg justify-center items-center mb-5 bg-purple-600'>
+                    <Text className='text-white text-2xl font-bold'>
                         Register
                     </Text>
                 </TouchableOpacity>
