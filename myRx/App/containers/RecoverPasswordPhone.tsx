@@ -40,7 +40,7 @@ const RecoberPasswordPhone = () => {
 
          <TextInput
                 placeholder="1234-5678"
-                className="border border-[#CFE6F1] rounded-lg p-2 mt-4 h-12"
+                className="border border-[#CFE6F1] rounded-lg p-2 mt-4 h-12 w-[380px]"
                 secureTextEntry
               />
       </View>

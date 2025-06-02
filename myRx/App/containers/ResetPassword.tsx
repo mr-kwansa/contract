@@ -47,7 +47,7 @@ const handletohome = () => {
             <TextInput
                   placeholder='Enter your new password'
                   secureTextEntry={true}
-                  className='border border-gray-300 rounded-md p-2 mt-2 h-18'
+                  className='border border-[#CFE6F1] rounded-md p-2 mt-2 h-18 w-[380px]'
                 />
             </View>
             <View>
@@ -57,7 +57,7 @@ const handletohome = () => {
                 <TextInput
                   placeholder='Enter your new password again'
                   secureTextEntry={true}
-                  className='border border-gray-300 rounded-md h-18 p-2 mt-2'
+                  className='border border-[#CFE6F1] rounded-md h-18 p-2 mt-2 w-[380px]'
                 />
 
             </View>

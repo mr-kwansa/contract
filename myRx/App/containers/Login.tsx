@@ -188,13 +188,13 @@ export default function TabViewExample() {
             className="w-52 h-10 rounded-lg items-center justify-center mb-5"
             onPress={handletologin}
           >
-            <Text className="text-2xl items-center justify-center">Sign In</Text>
+            <Text className="text-2xl w-48 h-10 text-center mr-4 rounded-lg items-center justify-center  bg-purple-600 text-white">Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className="w-52 h-10 rounded-lg justify-center items-center mb-5 bg-purple-600"
+            className=" h-10 rounded-lg justify-center ml-10 items-center mb-5"
             onPress={handletocreateacc}
           >
-            <Text className="text-white text-2xl font-bold">Register</Text>
+            <Text className=" text-2xl ">Register</Text>
           </TouchableOpacity>
         </View>
       </View>
