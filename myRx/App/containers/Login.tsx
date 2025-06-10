@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import {
   View,
   useWindowDimensions,
@@ -18,7 +19,7 @@ import PrimaryButton from 'components/PrimaryButton';
 // --- Navigation Type Definition ---
 type RootStackParamList = {
   ForgotPassword: undefined;
-  LoginPage: undefined;
+  Home: undefined;
   AccountCreationPage: undefined;
 };
 
@@ -52,9 +53,11 @@ export default function TabViewExample() {
     navigation.navigate('ForgotPassword');
     console.log('hello I am pressed');
   };
-
+  const [isLoggedin, seIsLoggedin] = useState(false);
   const handletologin = () => {
-    navigation.navigate('LoginPage');
+    seIsLoggedin(true);
+    console.log('Login button pressed');
+    navigation.navigate('Home');
   };
 
   const handletocreateacc = () => {
@@ -211,3 +214,19 @@ export default function TabViewExample() {
     </SafeAreaView>
   );
 }
+// Remove this function. Instead, import useState from React at the top:
+// import * as React from 'react';
+// Then use React.useState where needed.
+// If you want a standalone implementation for learning purposes:
+
+// function useState<T>(initialValue: T): [T, (newValue: T) => void] {
+//   let value = initialValue;
+//   const setValue = (newValue: T) => {
+//     value = newValue;
+//   };
+//   return [value, setValue];
+// }
+
+// Note: This is a simplified mock and won't trigger re-renders in React components.
+// In real React code, always use React.useState.
+

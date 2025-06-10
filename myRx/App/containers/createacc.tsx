@@ -40,11 +40,11 @@ const Createacc = () => {
     type RootStackParamList = {
             LoginPage: undefined;
             Verification: undefined;
+            Home: undefined;
              };
     type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
     type NavigationProp2 = NativeStackNavigationProp<RootStackParamList, 'Verification'>;
 
-    
     const handletologin = () => {
         navigation.navigate('LoginPage')
         
@@ -53,6 +53,7 @@ const Createacc = () => {
     const handletootp = () =>{
         navigation.navigate('Verification')
         console.log('hello im am pressed ')
+        
     };
 
 
