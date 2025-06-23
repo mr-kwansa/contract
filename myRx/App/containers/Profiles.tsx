@@ -302,9 +302,8 @@ export default function TabViewExample() {
         </Text>
      </View>
      <View> 
-      <Text>
-        line
-      </Text>
+
+       <View className="my-4 border-t border-gray-300" />
       <ScrollView>
       <View>
         <ScrollView >
@@ -469,7 +468,7 @@ export default function TabViewExample() {
   });
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <Header showback={true} />
       <View className="ml-4 mt-[-30]">
         <Text className="text-purple-600 text-3xl font-bold">Account</Text>
